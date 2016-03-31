@@ -28,7 +28,12 @@
 			ease: 'ease',
 			trickleRate: 0.02,
 			trickleSpeed: 500,
-			template: '<div class="ngProgressLite"><div class="ngProgressLiteBar"><div class="ngProgressLiteBarShadow"></div></div></div>'
+			template: '<div class="ngProgressLite"><div class="ngProgressLiteBar"><div class="ngProgressLiteBarShadow"></div></div></div>',
+			loadFromElement: false
+		};
+
+		this.mapExistingElement = function (selector) {
+			settings.loadFromElement = selector;
 		};
 
 		this.$get = ['$document', function ($document) {
@@ -42,7 +47,12 @@
 					}
 
 					$body.addClass('ngProgressLite-on');
-					$progressBarEl = angular.element(settings.template);
+					if (settings.loadFromElement) {
+						$progressBarEl = angular.element(settings.loadFromElement);
+					}
+					if ($progressBarEl == void 0) {
+						$progressBarEl = angular.element(settings.template);
+					}
 					$body.append($progressBarEl);
 					cleanForElement = false;
 
