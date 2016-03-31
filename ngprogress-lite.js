@@ -50,10 +50,10 @@
 					if (settings.loadFromElement) {
 						$progressBarEl = angular.element(settings.loadFromElement);
 					}
-					if ($progressBarEl == void 0) {
+					if ($progressBarEl == void 0 || $progressBarEl[0] == void 0) {
 						$progressBarEl = angular.element(settings.template);
+                        $body.append($progressBarEl);
 					}
-					$body.append($progressBarEl);
 					cleanForElement = false;
 
 					return $progressBarEl;
